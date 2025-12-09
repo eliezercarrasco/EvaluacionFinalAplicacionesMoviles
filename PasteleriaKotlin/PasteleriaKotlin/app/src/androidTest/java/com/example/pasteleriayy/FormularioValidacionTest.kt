@@ -40,3 +40,15 @@ class FormularioValidacionInstrumentedTest {
         composeTestRule.onNodeWithText("Registrar Usuario").performClick()
         composeTestRule.onNodeWithText("Las contraseñas no coinciden").assertExists()
     }
+        @Test
+    fun cameraButtonExists() {
+        val activity = composeTestRule.activity
+        val nav = NavController(activity)
+        composeTestRule.setContent {
+            FormularioValidacion(navController = nav)
+        }
+        composeTestRule.onNodeWithText("Cámara").assertExists()
+    }
+}
+
+
