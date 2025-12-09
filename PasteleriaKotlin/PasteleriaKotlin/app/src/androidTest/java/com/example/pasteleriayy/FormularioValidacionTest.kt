@@ -27,3 +27,16 @@ class FormularioValidacionInstrumentedTest {
         }
         composeTestRule.onNodeWithText("Registro de Usuario").assertExists()
     }
+
+   @Test
+    fun mismatchedPasswordsShowsErrorMessage() {
+        val activity = composeTestRule.activity
+        val nav = NavController(activity)
+        composeTestRule.setContent {
+            FormularioValidacion(navController = nav)
+        }
+        composeTestRule.onNodeWithText("Contraseña").performTextInput("abc123")
+        composeTestRule.onNodeWithText("Confirmar Contraseña").performTextInput("diff")
+        composeTestRule.onNodeWithText("Registrar Usuario").performClick()
+        composeTestRule.onNodeWithText("Las contraseñas no coinciden").assertExists()
+    }
